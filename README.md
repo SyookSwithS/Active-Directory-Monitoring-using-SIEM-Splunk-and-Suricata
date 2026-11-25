@@ -32,14 +32,14 @@
 
 ## 📝 Executive Summary
 
-This report covers a purple-team exercise run in a lab that I built myself. The goal was to act out a multi-step attack against an Active Directory Domain Controller. I walked through the full attack lifecycle — reconnaissance, credential access, privilege escalation, and anti-forensics — and at every stage, checked whether the detection tools caught what was happening. I used **Splunk Enterprise** as a host-based SIEM and **Security Onion** as a network-based Network Security Monitoring (NSM) solution.
+This report covers a purple-team exercise run in a lab that I built myself. The goal was to act out a multi-step attack against an Active Directory Domain Controller. I walked through the full attack lifecycle includes reconnaissance, credential access, privilege escalation, and anti-forensics on every stage. I need to  Identify whether the detection tools caught what was happening. I used **Splunk Enterprise** as a host-based SIEM and **Security Onion** as a network-based Network Security Monitoring (NSM) solution.
 
 I caught every stage of the attack. The exercise also turned up two real detection gaps that I found and fixed in the middle of the work:
 
 1. **Reconnaissance activity leaves no trace in host-based Windows Event Logs.** Network-layer visibility was needed to spot it.
 2. **Windows' default audit policy does not log scheduled-task creation events.** That meant a persistence technique (T1053.005) stayed invisible until I explicitly corrected the audit policy.
 
-The exercise ends with a demonstration of the most important finding: **centralized log forwarding to a SIEM beats anti-forensics.** When the attacker wiped the Windows Security event log to cover their tracks, the proof of the earlier attack stages was still fully intact in Splunk — because it had already been ingested in near real time.
+The exercise ends with a demonstration of the most important finding: **centralized log forwarding to a SIEM beats anti-forensics.** When the attacker wiped the Windows Security event log to cover their tracks, the proof of the earlier attack stages was still fully intact in Splunk  because it had already been ingested in near real time.
 
 **Objectives:** Validate Windows Security log ingestion by investigating reconnaissance, repeated authentication failures, and privileged group changes, while assessing scheduled-task auditing and log-clearing detection.
 
@@ -128,7 +128,7 @@ Network telemetry is necessary to complement host authentication and audit recor
 
 ![Suricata alert detail](images/INC-001/03-suricata-alert-detail.png)
 
-*Figure 1.3 — The ET SCAN MS Terminal Server Traffic and ET SCAN Nmap Scripting Engine User-Agent signatures both fired, with `destination.ip` matching the scanned host (192.168.1.102).*
+*Figure 1.3 — The ET (Emerging Threat) SCAN MS Terminal Server Traffic and ET (Emerging Threat) SCAN Nmap Scripting Engine User-Agent signatures both fired, with `destination.ip` matching the scanned host (192.168.1.102).*
 
 ![Security Onion telemetry overview](images/INC-001/04-security-onion-telemetry-overview.png)
 
@@ -246,7 +246,7 @@ schtasks /create /tn "WindowsUpdateCheck" /tr "powershell.exe -WindowStyle Hidde
 ```
 ![schtasks persistence](images/INC-003/03-schtasks-persistence.png)
 
-### 🛡️ Defense — Initial detection in Splunk
+###  Defense — Initial detection in Splunk
 
 Account creation (4720) and group change (4728) were detected immediately:
 
@@ -286,7 +286,7 @@ Then I repeated the same steps for `hacker2_syook` — and all events were now d
 
 - **Real detection gap found and fixed:** Windows' default audit policy does not enable "Other Object Access Events," leaving scheduled-task persistence (T1053.005) invisible out of the box.
 - Apply a baseline Advanced Audit Policy via GPO across all domain-joined systems.
-- Alert on the pattern `EventCode=4720` followed shortly by `EventCode=4728` — a strong persistence/privilege-escalation indicator.
+- Alert on the pattern `EventCode=4720` followed shortly by `EventCode=4728` which a strong persistence/privilege-escalation indicator.
 
 ---
 
@@ -316,7 +316,7 @@ wevtutil cl Security
 
 ![Event Viewer log cleared](images/INC-004/02-eventviewer-log-cleared.png)
 
-*Figure 4.1 — Locally, the Security log now contains a single event: EventCode 1102 ("Log clear"). Every other event — including all INC-003 activity — has been wiped locally.*
+*Figure 4.1 — Locally, the Security log now contains a single event: EventCode 1102 ("Log clear"). Every other event including all INC-003 activity — has been wiped locally.*
 
 ### 🛡️ Defense — Confirm Splunk captured the clearing event
 
@@ -349,7 +349,7 @@ wevtutil cl Security
 
 ## 📊 Splunk Dashboard
 
-To bring everything together, I built a Splunk Dashboard Studio dashboard that visualizes the whole attack chain at a glance — an attack timeline across every EventCode involved, plus live KPI counters for the two highest-signal detections.
+To bring everything together, I built a Splunk Dashboard Studio dashboard that visualizes the whole attack chain at a glance an attack timeline across every EventCode involved, plus live KPI counters for the two highest-signal detections.
 
 ![Splunk SOC dashboard](images/setup/splunk-dashboard-final.jpeg)
 
@@ -372,16 +372,16 @@ To bring everything together, I built a Splunk Dashboard Studio dashboard that v
 
 | Attack Stage | Splunk (Host) | Security Onion (Network) |
 |---|---|---|
-| Reconnaissance | ❌ No native signal | ✅ Detected — ET SCAN signatures |
-| SMB Brute Force | ✅ Detected — EventCode 4625 | — Not evaluated |
-| Privilege Escalation / Persistence | ✅ Detected — 4720/4728/4698 | — Not evaluated |
-| Log Tampering | ✅ Detected — EventCode 1102, evidence preserved | — Not evaluated |
+| Reconnaissance | No native signal |  Detected — ET SCAN signatures |
+| SMB Brute Force |  Detected — EventCode 4625 | — Not evaluated |
+| Privilege Escalation / Persistence | Detected — 4720/4728/4698 | — Not evaluated |
+| Log Tampering | Detected — EventCode 1102, evidence preserved | — Not evaluated |
 
 > This demonstrates why a mature SOC relies on both **SIEM** (host/application telemetry) and **NSM** (network telemetry) — neither alone provides full visibility across the kill chain.
 
 ---
 
-## ✅ Conclusion
+## Conclusion
 
 This exercise successfully demonstrated full-lifecycle detection coverage of a realistic attack chain against an Active Directory Domain Controller, using a combination of host-based (Splunk) and network-based (Security Onion) monitoring.
 
@@ -397,7 +397,6 @@ This exercise successfully demonstrated full-lifecycle detection coverage of a r
 
 <div align="center">
 
-📄 Full formatted report: [`SOC_Lab_Attack_Detection_Report.docx`](SOC_Lab_Attack_Detection_Report.docx)
 📊 SPL queries used: [`detection-rules/splunk-spl-queries.md`](detection-rules/splunk-spl-queries.md)
 🗺️ MITRE mapping: [`mitre-attack-matrix.md`](mitre-attack-matrix.md)
 
