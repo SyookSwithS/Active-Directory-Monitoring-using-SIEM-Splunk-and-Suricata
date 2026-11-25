@@ -47,10 +47,10 @@ The exercise ends with a demonstration of the most important finding: **centrali
 
 | Stage | Attack | MITRE ATT&CK | Detected By | Status |
 |---|---|---|---|---|
-| **INC-001** | Network Reconnaissance (Nmap) | T1595 | Security Onion via Suricata | ✅ Detected |
-| **INC-002** | SMB Brute Force (NetExec) | T1110 | Splunk (EventCode 4625) | ✅ Detected |
-| **INC-003** | Privilege Escalation & Persistence | T1136 / T1098 / T1053.005 | Splunk (4720 / 4728 / 4698) | ✅ Detected |
-| **INC-004** | Security Log Tampering | T1070.001 | Splunk (EventCode 1102) | ✅ Detected |
+| **INC-001** | Network Reconnaissance (Nmap) | T1595 | Security Onion via Suricata |  Detected |
+| **INC-002** | SMB Brute Force (NetExec) | T1110 | Splunk (EventCode 4625) |  Detected |
+| **INC-003** | Privilege Escalation & Persistence | T1136 / T1098 / T1053.005 | Splunk (4720 / 4728 / 4698) |  Detected |
+| **INC-004** | Security Log Tampering | T1070.001 | Splunk (EventCode 1102) |  Detected |
 
 ## 🖧 Lab Topology
 
