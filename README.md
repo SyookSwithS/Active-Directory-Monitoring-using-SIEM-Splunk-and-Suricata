@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ SOC Lab: Attack Simulation & Threat Detection
+# 🛡️ Active Directory Monitoring using SIEM Splunk and Suricata
 
 **A purple-team exercise against an Active Directory Domain Controller — attacked, detected, and documented end-to-end.**
 
