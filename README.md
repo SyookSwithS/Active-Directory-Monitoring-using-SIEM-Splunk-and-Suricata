@@ -95,7 +95,7 @@ This structure follows the **NIST SP 800-61 Incident Response Lifecycle**:
 
 ### Alert Triggered
 
-Suricata, via Security Onion, fired on Nmap's version-detection scripting engine traffic, flagging the activity as a network scan.
+Suricata, via Security Onion, triggered on Nmap's version-detection scripting engine traffic, flagging the activity as a network scan.
 
 ### Initial Triage
 
