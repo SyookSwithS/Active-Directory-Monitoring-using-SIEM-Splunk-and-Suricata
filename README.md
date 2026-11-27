@@ -1,6 +1,10 @@
 <div align="center">
 
 # 🛡️ Active Directory Monitoring using SIEM Splunk and Suricata
+<img width="1022" height="768" alt="image" src="https://github.com/user-attachments/assets/47b03fe7-ffdc-4dbc-9f10-73488ad5785f" />
+
+
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/7d40d781-d206-4592-afef-6c1ad4ba0152" />
 
 **A purple-team exercise against an Active Directory Domain Controller — attacked, detected, and documented end-to-end.**
 
