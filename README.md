@@ -1,6 +1,8 @@
 <div align="center">
 
 # 🛡️ Active Directory Monitoring using SIEM Splunk and Suricata
+
+<img width="1072" height="840" alt="image" src="https://github.com/user-attachments/assets/d8ea0697-e934-4b85-9f18-2b31371d22a4" />
 <img width="1022" height="768" alt="image" src="https://github.com/user-attachments/assets/47b03fe7-ffdc-4dbc-9f10-73488ad5785f" />
 
 
